@@ -4,10 +4,6 @@ const { HttpsProxyAgent } = require("https-proxy-agent");
 const TOKEN = process.env.TELEGRAM_TOKEN;
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
-// 替换为你的代理地址（来自 clash、v2ray 等）
-const TelegramBot = require("node-telegram-bot-api");
-const { HttpsProxyAgent } = require("https-proxy-agent");
-
 // 只在本地启用代理（例如通过环境变量判断）
 const IS_LOCAL = process.env.LOCAL === "true";
 const proxy = "http://127.0.0.1:7890";
