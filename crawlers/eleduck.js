@@ -2,13 +2,14 @@ const puppeteer = require("puppeteer");
 
 async function crawlEleduck() {
   const url = "https://eleduck.com/";
-  const browser = await puppeteer.launch({
-    executablePath:
-      "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-    headless: false,
-    defaultViewport: null,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
+  const browser = await puppeteer.launch({ headless: "new" });
+  // const browser = await puppeteer.launch({
+  //   executablePath:
+  //     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  //   headless: false,
+  //   defaultViewport: null,
+  //   args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  // });
 
   const page = await browser.newPage();
 
