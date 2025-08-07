@@ -1,17 +1,24 @@
 const TelegramBot = require("node-telegram-bot-api");
 const { HttpsProxyAgent } = require("https-proxy-agent");
 
-const TOKEN = "7441478747:AAGcSIqIM4MawJQCxQyzCeFboSbnoO6fulU"; // 替换为你的 Token
-const CHAT_ID = "@WorkRemotoChannel"; // 或者 '-100xxxxxxxxxx'
+const TOKEN = process.env.TELEGRAM_TOKEN;
+const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
 // 替换为你的代理地址（来自 clash、v2ray 等）
-const proxy = "http://127.0.0.1:7897";
+const TelegramBot = require("node-telegram-bot-api");
+const { HttpsProxyAgent } = require("https-proxy-agent");
+
+// 只在本地启用代理（例如通过环境变量判断）
+const IS_LOCAL = process.env.LOCAL === "true";
+const proxy = "http://127.0.0.1:7890";
 
 const bot = new TelegramBot(TOKEN, {
   polling: false,
-  request: {
-    agent: new HttpsProxyAgent(proxy),
-  },
+  request: IS_LOCAL
+    ? {
+        agent: new HttpsProxyAgent(proxy),
+      }
+    : {}, // GitHub Actions 不使用代理
 });
 
 /**
