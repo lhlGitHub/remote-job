@@ -57,7 +57,7 @@ jobs:
             libasound2t64
 
       - name: Install Node.js dependencies
-        run: npm ci
+        run: npm install
 
       - name: Run bot (爬虫并推送到 Telegram)
         run: node index.js
