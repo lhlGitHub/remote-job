@@ -3,7 +3,10 @@ const { HttpsProxyAgent } = require("https-proxy-agent");
 
 const TOKEN = process.env.TELEGRAM_TOKEN;
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
-
+if (!TOKEN || !CHAT_ID) {
+  console.error("❌ EFATAL: Telegram Token or Chat ID not provided!");
+  process.exit(1);
+}
 // 只在本地启用代理（例如通过环境变量判断）
 const IS_LOCAL = process.env.LOCAL === "true";
 const proxy = "http://127.0.0.1:7890";
