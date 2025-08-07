@@ -1,0 +1,17 @@
+{
+  "name": "remote-job-bot-node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.3.1",
+    "https-proxy-agent": "^7.0.6",
+    "node-cron": "^3.0.2",
+    "node-telegram-bot-api": "^0.61.0",
+    "puppeteer": "^21.3.8"
+  }
+}
