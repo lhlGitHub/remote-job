@@ -8,7 +8,10 @@ const puppeteer = require("puppeteer");
 async function crawlBoss() {
   const url = "https://www.zhipin.com/web/geek/job?query=远程&city=100010000";
 
-  const browser = await puppeteer.launch({ headless: "new" });
+  const browser = await puppeteer.launch({
+    headless: "new", // 或 true
+    args: ["--no-sandbox", "--disable-setuid-sandbox"], // 必须有这两个参数
+  });
 
   // const browser = await puppeteer.launch({
   //   executablePath:
