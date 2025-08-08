@@ -1,8 +1,9 @@
 name: Run Remote Job Crawler
 
 on:
+  # 每 4 小时运行一次（UTC 时间）
   schedule:
-    - cron: "0 */4 * * *" # 每小时运行一次（UTC 时间）
+    - cron: "0 */4 * * *"
   workflow_dispatch: # 可手动触发
 
 jobs:
