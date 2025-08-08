@@ -76,7 +76,7 @@ async function crawlEleduck() {
       job.url = link;
       job.source = "电鸭";
       delete job.content;
-      console.log("✅ 抓取成功:", job);
+      console.log("✅ eleduck抓取成功:", job);
 
       jobs.push(job);
       await detailPage.close();

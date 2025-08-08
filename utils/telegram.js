@@ -57,7 +57,7 @@ async function sendJobToTelegram(job) {
   const message = `
 📢 *${title}*
 📌 来源: ${source}
-📝 ${tech} ${salary}
+📝 摘要: ${tech} ${salary}
 🔗 [查看详情](${url})
   `.trim();
 

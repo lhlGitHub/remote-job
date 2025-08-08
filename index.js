@@ -6,17 +6,19 @@ const { sendJobToTelegram } = require("./utils/telegram");
 // 导入爬虫
 const crawlBoss = require("./crawlers/boss");
 const crawlEleduck = require("./crawlers/eleduck");
+const crawlV2ex = require("./crawlers/v2ex");
 
 async function main() {
   console.log("📦 开始抓取远程岗位...");
 
   // 所有来源的数据 eleduckJobs
-  const [bossJobs, eleduckJobs] = await Promise.all([
+  const [bossJobs, eleduckJobs, v2exJobs] = await Promise.all([
     crawlBoss(),
     crawlEleduck(),
+    crawlV2ex(),
   ]);
 
-  const allJobs = [...eleduckJobs, ...bossJobs];
+  const allJobs = [...eleduckJobs, ...bossJobs, ...v2exJobs];
   const oldJobs = loadJobs();
   const newJobs = filterNewJobs(allJobs, oldJobs);
 
