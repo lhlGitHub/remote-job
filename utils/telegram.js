@@ -10,7 +10,7 @@ if (!TOKEN || !CHAT_ID) {
 // 只在本地启用代理（例如通过环境变量判断）
 const IS_LOCAL = process.env.LOCAL === "true";
 const proxy = "http://127.0.0.1:7890";
-
+console.log("IS_LOCAL", IS_LOCAL);
 const bot = new TelegramBot(TOKEN, {
   polling: false,
   request: IS_LOCAL
@@ -50,14 +50,14 @@ async function sendJobToTelegram(job) {
   const title = escapeMarkdown(job.title);
   const date = escapeMarkdown(job.date);
   const source = escapeMarkdown(job.source);
-  const summary = escapeMarkdown(job.summary);
+  const tech = escapeMarkdown(job.tech);
+  const salary = escapeMarkdown(job.salary);
   const url = job.url;
 
   const message = `
 📢 *${title}*
-📅 ${date}
 📌 来源: ${source}
-📝 ${summary}
+📝 ${tech} ${salary}
 🔗 [查看详情](${url})
   `.trim();
 

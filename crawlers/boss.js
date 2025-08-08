@@ -8,18 +8,20 @@ const puppeteer = require("puppeteer");
 async function crawlBoss() {
   const url = "https://www.zhipin.com/web/geek/job?query=远程&city=100010000";
 
-  const browser = await puppeteer.launch({
-    headless: "new", // 或 true
-    args: ["--no-sandbox", "--disable-setuid-sandbox"], // 必须有这两个参数
-  });
-
   // const browser = await puppeteer.launch({
-  //   executablePath:
-  //     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-  //   headless: false,
-  //   defaultViewport: null,
-  //   args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  //   headless: "new", // 或 true
+  //   args: ["--no-sandbox", "--disable-setuid-sandbox"], // 必须有这两个参数
   // });
+
+  const IS_LOCAL = process.env.LOCAL === "true";
+  const browser = await puppeteer.launch({
+    executablePath: IS_LOCAL
+      ? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+      : undefined,
+    headless: IS_LOCAL ? false : "new", // 或 true
+    defaultViewport: null,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
 
   const page = await browser.newPage();
   await page.setUserAgent(
@@ -30,28 +32,26 @@ async function crawlBoss() {
   await page.waitForSelector(".job-card-box", { timeout: 10000 });
 
   const jobs = await page.evaluate(() => {
-    const items = Array.from(document.querySelectorAll(".job-card-box"));
+    const items = Array.from(document.querySelectorAll(".job-card-box")).slice(
+      0,
+      5
+    );
+
     return items.map((item) => {
       const titleEl = item.querySelector(".job-name");
-      const salaryEl = item.querySelector(".job-salary");
-      const companyEl = item.querySelector(".boss-name");
-      const locEl = item.querySelector(".company-location");
-      const dateEl = item.querySelector(".job-card-footer span:last-of-type");
+      // const salaryEl = item.querySelector(".job-salary");
 
       const url = titleEl?.getAttribute("href") || "";
-      const salary =
-        salaryEl?.textContent.replace(/[\uE000-\uF8FF]/g, "") || "薪资面议";
+      // const salary =
+      //   salaryEl?.textContent.replace(/[\uE000-\uF8FF]/g, "") || "薪资面议";
       const title = titleEl?.textContent.trim() || "未知职位";
-      const company = companyEl?.textContent.trim() || "未知公司";
-      const location = locEl?.textContent.trim() || "远程";
-      const date = dateEl?.textContent.trim() || "刚刚";
 
+      // console.log("salaryEl", salaryEl, "salary", salary);
       return {
         id: `https://www.zhipin.com${url}`,
         title,
-        date: `发布: ${date}`,
         source: "BOSS直聘",
-        summary: `${title}，${salary}，${company}`,
+        // salary,
         url: `https://www.zhipin.com${url}`,
       };
     });

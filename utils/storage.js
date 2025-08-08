@@ -18,7 +18,9 @@ function loadJobs() {
 // 写入 JSON 数据
 function saveJobs(jobs) {
   try {
-    fs.writeFileSync(dataFile, JSON.stringify(jobs, null, 2));
+    // 只保存最新的100条数据
+    const limitedJobs = jobs.slice(-100);
+    fs.writeFileSync(dataFile, JSON.stringify(limitedJobs, null, 2));
   } catch (e) {
     console.error("写入 jobs.json 错误", e);
   }

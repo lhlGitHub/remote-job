@@ -1,20 +1,22 @@
+require("dotenv").config();
+
 const { loadJobs, saveJobs, filterNewJobs } = require("./utils/storage");
 const { sendJobToTelegram } = require("./utils/telegram");
 
 // 导入爬虫
 const crawlBoss = require("./crawlers/boss");
-const crawlToloka = require("./crawlers/eleduck");
+const crawlEleduck = require("./crawlers/eleduck");
 
 async function main() {
   console.log("📦 开始抓取远程岗位...");
 
-  // 所有来源的数据
-  const [bossJobs, tolokaJobs] = await Promise.all([
+  // 所有来源的数据 eleduckJobs
+  const [bossJobs, eleduckJobs] = await Promise.all([
     crawlBoss(),
-    crawlToloka(),
+    crawlEleduck(),
   ]);
 
-  const allJobs = [...bossJobs, ...tolokaJobs];
+  const allJobs = [...eleduckJobs, ...bossJobs];
   const oldJobs = loadJobs();
   const newJobs = filterNewJobs(allJobs, oldJobs);
 
@@ -27,7 +29,7 @@ async function main() {
     await sendJobToTelegram(job);
   }
 
-  // 合并后写入新数据
+  // // 合并后写入新数据
   saveJobs([...oldJobs, ...newJobs]);
   console.log(`✅ 本次新增 ${newJobs.length} 条岗位`);
 }

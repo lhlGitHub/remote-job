@@ -1,51 +1,89 @@
 const puppeteer = require("puppeteer");
+const { extractFieldsByRegex } = require("../utils/extractFieldsByRegex");
 
 async function crawlEleduck() {
-  const url = "https://eleduck.com/";
+  const url = "https://eleduck.com/search?keyword=远程&sort=new";
+
+  const IS_LOCAL = process.env.LOCAL === "true";
   const browser = await puppeteer.launch({
-    headless: "new", // 或 true
-    args: ["--no-sandbox", "--disable-setuid-sandbox"], // 必须有这两个参数
+    executablePath: IS_LOCAL
+      ? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+      : undefined,
+    headless: IS_LOCAL ? false : "new", // 或 true
+    defaultViewport: null,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
 
-  // const browser = await puppeteer.launch({
-  //   executablePath:
-  //     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-  //   headless: false,
-  //   defaultViewport: null,
-  //   args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  // });
-
   const page = await browser.newPage();
-
   await page.setUserAgent(
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
   );
 
+  // 首页抓取
   await page.goto(url, { waitUntil: "networkidle2" });
-  await page.waitForSelector(".post-item", { timeout: 10000 });
+  await page.waitForSelector(".post-title a", { timeout: 10000 });
 
-  const jobs = await page.evaluate(() => {
-    return Array.from(document.querySelectorAll(".post-item")).map((item) => {
-      const titleEl = item.querySelector(".post-title");
-      const href = item.querySelector("a")?.getAttribute("href");
-      const company =
-        item.querySelector(".meta-info span")?.textContent.trim() || "电鸭公司";
-      const dateText =
-        item
-          .querySelector(".meta-info")
-          ?.textContent.match(/\d+天前|\d+小时前|\d+分钟前|刚刚/)?.[0] ||
-        "未知时间";
+  const jobLinks = await page.evaluate(() =>
+    Array.from(document.querySelectorAll(".post-title a"))
+      .map((a) => {
+        const href = a.href.startsWith("http")
+          ? a.href
+          : `https://eleduck.com${a.getAttribute("href")}`;
+        const title = a.innerText.trim();
+        return { href, title };
+      })
+      .filter(
+        ({ href, title }) =>
+          href.includes("/posts/") &&
+          !title.includes("已暂停") &&
+          !title.includes("已结束")
+      )
+      .slice(0, 5)
+      .map(({ href }) => href)
+  );
 
-      return {
-        id: `https://eleduck.com${href}`,
-        title: titleEl?.textContent.trim() || "无标题",
-        date: `发布: ${dateText}`,
-        source: "电鸭",
-        summary: `${company}，远程岗位`,
-        url: `https://eleduck.com${href}`,
-      };
-    });
-  });
+  const jobs = [];
+
+  for (const link of jobLinks) {
+    try {
+      const detailPage = await browser.newPage();
+      await detailPage.goto(link, { waitUntil: "domcontentloaded" });
+
+      // ✅ 等待详情页主要内容加载完成
+      await detailPage.waitForSelector(".page-title", { timeout: 10000 });
+      await detailPage.waitForSelector(".meta-info span", { timeout: 10000 });
+      await detailPage.waitForSelector(".post-contents", { timeout: 10000 });
+
+      const job = await detailPage.evaluate(() => {
+        const title =
+          document.querySelector(".page-title")?.innerText.trim() || "无标题";
+        const company =
+          document.querySelector(".meta-info span")?.innerText.trim() ||
+          "电鸭公司";
+        const content =
+          document.querySelector(".post-contents")?.innerText.trim() || "";
+
+        return { title, company, content };
+      });
+
+      const extracted = await extractFieldsByRegex(job.content);
+
+      job.tech = extracted.tech;
+      job.salary = extracted.salary;
+      // job.requirements = extracted.requirements;
+
+      job.id = link;
+      job.url = link;
+      job.source = "电鸭";
+      delete job.content;
+      console.log("✅ 抓取成功:", job);
+
+      jobs.push(job);
+      await detailPage.close();
+    } catch (err) {
+      console.warn(`⚠️ 详情页出错: ${link}`, err.message);
+    }
+  }
 
   await browser.close();
 
