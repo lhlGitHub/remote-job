@@ -26,9 +26,15 @@ async function crawlV2ex() {
   await page.goto(url, { waitUntil: "domcontentloaded" });
   await page.waitForSelector("#TopicsNode .cell", { timeout: 10000 });
 
-  // ✅ 修复提取逻辑：只提取 .item_title 下的链接
+  // ✅ 修复提取逻辑：只提取 .item_title 下的链接，过滤非招聘帖子
   const postLinks = await page.evaluate(() => {
     return Array.from(document.querySelectorAll(".item_title a"))
+      .filter((el) => {
+        const title = el.textContent.trim();
+        // 过滤包含推荐、曝光等非招聘关键词的帖子
+        const excludeKeywords = ["推荐", "曝光", "推广", "广告", "软文"];
+        return !excludeKeywords.some((keyword) => title.includes(keyword));
+      })
       .slice(0, 3) // 抓取前3条
       .map((el) => `https://www.v2ex.com${el.getAttribute("href")}`);
   });

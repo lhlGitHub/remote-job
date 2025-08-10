@@ -133,5 +133,32 @@
     "tech": "Python",
     "salary": "",
     "company": "liyi123"
+  },
+  {
+    "title": "web3投资分析师_可远程",
+    "company": "未知公司",
+    "salary": "15-20K·14薪",
+    "tech": "",
+    "id": "https://www.zhipin.com/job_detail/bc2c09159683fa4f1Hxy2tu4FlNX.html",
+    "url": "https://www.zhipin.com/job_detail/bc2c09159683fa4f1Hxy2tu4FlNX.html",
+    "source": "BOSS直聘"
+  },
+  {
+    "title": "专家招募顾问（兼职，可远程）",
+    "company": "未知公司",
+    "salary": "500-2000元/月",
+    "tech": "",
+    "id": "https://www.zhipin.com/job_detail/2ce7f6885f175d6203Vz09u-ElRW.html",
+    "url": "https://www.zhipin.com/job_detail/2ce7f6885f175d6203Vz09u-ElRW.html",
+    "source": "BOSS直聘"
+  },
+  {
+    "title": "招聘（远程办公-web3） Golang 工程师 测试工程师 前端工程师（Nodejs / React） Flutter（app） DevOps 工程师 大数据开发工程师 Product Manager",
+    "id": "https://www.v2ex.com/t/1151259#reply0",
+    "url": "https://www.v2ex.com/t/1151259#reply0",
+    "source": "V2EX",
+    "tech": "Vue, React, Angular, Node.js, Python, Go, MySQL, AWS, Redis, Linux, Flutter, iOS",
+    "salary": "",
+    "company": "justinX"
   }
 ]
