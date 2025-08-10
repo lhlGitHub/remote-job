@@ -2,7 +2,7 @@ const puppeteer = require("puppeteer");
 const { extractFieldsByRegex } = require("../utils/extractFieldsByRegex");
 
 async function crawlEleduck() {
-  const url = "https://eleduck.com/search?keyword=远程&sort=new";
+  const url = "https://eleduck.com/categories/5?tags=0-0-19";
 
   const IS_LOCAL = process.env.LOCAL === "true";
   const browser = await puppeteer.launch({
