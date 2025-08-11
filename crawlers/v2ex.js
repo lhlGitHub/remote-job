@@ -36,7 +36,12 @@ async function crawlV2ex() {
         return !excludeKeywords.some((keyword) => title.includes(keyword));
       })
       .slice(0, 3) // 抓取前3条
-      .map((el) => `https://www.v2ex.com${el.getAttribute("href")}`);
+      .map((el) => {
+        const href = el.getAttribute("href");
+        // 去掉 # 后面的参数
+        const cleanHref = href.split("#")[0];
+        return `https://www.v2ex.com${cleanHref}`;
+      });
   });
 
   const jobs = [];

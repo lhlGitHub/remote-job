@@ -160,5 +160,77 @@
     "tech": "Vue, React, Angular, Node.js, Python, Go, MySQL, AWS, Redis, Linux, Flutter, iOS",
     "salary": "",
     "company": "justinX"
+  },
+  {
+    "title": "招聘&找人可远程/可兼职；高速增长的数字游民社交产品找全能型产品经理&设计师",
+    "company": "大灰@社区...",
+    "tech": "",
+    "salary": "",
+    "id": "https://eleduck.com/posts/mbfydx",
+    "url": "https://eleduck.com/posts/mbfydx",
+    "source": "电鸭"
+  },
+  {
+    "title": "招聘&找人【远程】邀请志同道合的技术合伙人，共建开源 BaaS 基础设施",
+    "company": "Rustica",
+    "tech": "TypeScript, Vue, Python, Go, PostgreSQL",
+    "salary": "",
+    "id": "https://eleduck.com/posts/a4frbp",
+    "url": "https://eleduck.com/posts/a4frbp",
+    "source": "电鸭"
+  },
+  {
+    "title": "招聘&找人初级流量运营",
+    "company": "光线电子",
+    "tech": "",
+    "salary": "",
+    "id": "https://eleduck.com/posts/YgfD2v",
+    "url": "https://eleduck.com/posts/YgfD2v",
+    "source": "电鸭"
+  },
+  {
+    "title": "招聘&找人求python兼职，熟悉Django框架，物联网开发，全栈更优~",
+    "company": "186****9189",
+    "tech": "Vue, Go",
+    "salary": "",
+    "id": "https://eleduck.com/posts/wwfKDQ",
+    "url": "https://eleduck.com/posts/wwfKDQ",
+    "source": "电鸭"
+  },
+  {
+    "title": "招聘&找人有没有一起合作做单子的小伙伴",
+    "company": "181****0512",
+    "tech": "Python, Java",
+    "salary": "",
+    "id": "https://eleduck.com/posts/mbfv3g",
+    "url": "https://eleduck.com/posts/mbfv3g",
+    "source": "电鸭"
+  },
+  {
+    "title": "iOS开发（可兼职可远程）",
+    "company": "未知公司",
+    "salary": "5000-15000元/月",
+    "tech": "iOS",
+    "id": "https://www.zhipin.com/job_detail/d8bc8db8cd94a77c03F629u6EFJV.html",
+    "url": "https://www.zhipin.com/job_detail/d8bc8db8cd94a77c03F629u6EFJV.html",
+    "source": "BOSS直聘"
+  },
+  {
+    "title": "继续捞前端实习生",
+    "id": "https://www.v2ex.com/t/1151435#reply15",
+    "url": "https://www.v2ex.com/t/1151435#reply15",
+    "source": "V2EX",
+    "tech": "",
+    "salary": "",
+    "company": "DanielNg23"
+  },
+  {
+    "title": "[远程] 高级数据 / 前端工程师 30 - 40K/mo",
+    "id": "https://www.v2ex.com/t/1150541",
+    "url": "https://www.v2ex.com/t/1150541",
+    "source": "V2EX",
+    "tech": "TypeScript, React, Python, Flutter",
+    "salary": "",
+    "company": "Aaaaaashu"
   }
 ]
