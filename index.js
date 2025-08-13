@@ -33,6 +33,7 @@ async function main() {
 
   // // 合并后写入新数据
   saveJobs([...oldJobs, ...newJobs]);
+  console.log("newJobs", newJobs);
   console.log(`✅ 本次新增 ${newJobs.length} 条岗位`);
 }
 
