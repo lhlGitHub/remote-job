@@ -17,7 +17,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          persist-credentials: false # 避免使用默认 token
+          token: ${{ secrets.GITHUB_TOKEN }} # 允许后续 git push
+          persist-credentials: true # 保留凭证以便 push
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -86,5 +87,3 @@ jobs:
           git add data/jobs.json
           git commit -m "Update jobs.json" || echo "No changes to commit"
           git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
