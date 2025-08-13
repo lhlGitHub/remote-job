@@ -27,9 +27,9 @@ async function main() {
     return;
   }
 
-  for (const job of newJobs) {
-    await sendJobToTelegram(job);
-  }
+  // for (const job of newJobs) {
+  //   await sendJobToTelegram(job);
+  // }
 
   // // 合并后写入新数据
   saveJobs([...oldJobs, ...newJobs]);

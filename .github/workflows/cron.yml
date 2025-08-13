@@ -6,6 +6,9 @@ on:
     - cron: "0 */4 * * *"
   workflow_dispatch: # 可手动触发
 
+permissions:
+  contents: write # 允许写入仓库
+
 jobs:
   crawl:
     runs-on: ubuntu-latest
@@ -13,6 +16,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false # 避免使用默认 token
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -73,3 +78,13 @@ jobs:
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
+      - name: Commit and push jobs.json
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/jobs.json
+          git commit -m "Update jobs.json" || echo "No changes to commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
