@@ -394,5 +394,23 @@
     "tech": "Python, MySQL",
     "salary": "",
     "company": "jollychang"
+  },
+  {
+    "title": "招聘&找人小红书视频剪辑招聘",
+    "company": "183****4312",
+    "tech": "",
+    "salary": "",
+    "id": "https://eleduck.com/posts/N0fOQ0",
+    "url": "https://eleduck.com/posts/N0fOQ0",
+    "source": "电鸭"
+  },
+  {
+    "title": "招聘&找人【全职远程，不限地点】C++ 工程师 / 海外交易平台",
+    "company": "MCHR",
+    "tech": "Go, MySQL, PostgreSQL, MongoDB, Docker, Redis, Linux",
+    "salary": "25-35k + 补贴 + 绩效奖金",
+    "id": "https://eleduck.com/posts/njf2GL",
+    "url": "https://eleduck.com/posts/njf2GL",
+    "source": "电鸭"
   }
 ]
