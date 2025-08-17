@@ -1,0 +1,66 @@
+const puppeteer = require("puppeteer");
+const { extractFieldsByRegex } = require("../utils/extractFieldsByRegex");
+/**
+ * 爬取 远程.work 的远程工作（列表页直接获取 title + 提要）
+ * @returns {Promise<Array>}
+ */
+async function crawlRemoteWork() {
+  const url = "https://yuancheng.work/";
+  const IS_LOCAL = process.env.LOCAL === "true";
+
+  const browser = await puppeteer.launch({
+    executablePath: IS_LOCAL
+      ? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+      : undefined,
+    headless: IS_LOCAL ? false : "new",
+    defaultViewport: null,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
+
+  const page = await browser.newPage();
+  await page.setUserAgent(
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+  );
+
+  await page.goto(url, { waitUntil: "domcontentloaded" });
+  await page.waitForSelector(".job", { timeout: 10000 });
+
+  // ✅ 直接在列表页提取岗位信息
+  const jobs = await page.evaluate(() => {
+    return Array.from(document.querySelectorAll(".job"))
+      .filter((el) => {
+        const company =
+          el.querySelector(".job-company a")?.innerText.trim() || "";
+        // 过滤掉 foya传媒 公司
+        return !company.includes("foya传媒");
+      })
+      .slice(0, 5)
+      .map((el) => {
+        const title =
+          el.querySelector(".job-title")?.innerText.trim() || "无标题";
+        const url = el.querySelector(".job-title")?.getAttribute("href") || "";
+        const company =
+          el.querySelector(".job-company a")?.innerText.trim() || "未知公司";
+        const salary =
+          el.querySelector(".job-salary")?.innerText.trim() || "未标注";
+        const summary = el.querySelector(".job-detail .typo")?.innerText.trim();
+
+        return { title, url, company, salary, summary };
+      });
+  });
+
+  // 🔍 结合正则抽取工具
+  for (const job of jobs) {
+    const extracted = await extractFieldsByRegex(job.summary);
+    delete job.summary;
+    job.tech = extracted.tech;
+    job.salary = job.salary === "未标注" ? extracted.salary : job.salary;
+    job.source = "远程.work";
+  }
+
+  await browser.close();
+  console.log(`🎯 抓取远程.work成功，共 ${jobs.length} 条`);
+  return jobs;
+}
+
+module.exports = crawlRemoteWork;

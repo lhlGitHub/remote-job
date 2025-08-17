@@ -7,18 +7,20 @@ const { sendJobToTelegram } = require("./utils/telegram");
 const crawlBoss = require("./crawlers/boss");
 const crawlEleduck = require("./crawlers/eleduck");
 const crawlV2ex = require("./crawlers/v2ex");
+const crawlRemoteWork = require("./crawlers/yuancheng");
 
 async function main() {
   console.log("📦 开始抓取远程岗位...");
 
   // 所有来源的数据 eleduckJobs
-  const [bossJobs, eleduckJobs, v2exJobs] = await Promise.all([
+  const [bossJobs, eleduckJobs, v2exJobs, remoteWorkJobs] = await Promise.all([
     crawlBoss(),
     crawlEleduck(),
     crawlV2ex(),
+    crawlRemoteWork(),
   ]);
 
-  const allJobs = [...eleduckJobs, ...bossJobs, ...v2exJobs];
+  const allJobs = [...eleduckJobs, ...bossJobs, ...v2exJobs, ...remoteWorkJobs];
   const oldJobs = loadJobs();
   const newJobs = filterNewJobs(allJobs, oldJobs);
 
@@ -31,7 +33,7 @@ async function main() {
     await sendJobToTelegram(job);
   }
 
-  // // 合并后写入新数据
+  // 合并后写入新数据
   saveJobs([...oldJobs, ...newJobs]);
   console.log("newJobs", newJobs);
   console.log(`✅ 本次新增 ${newJobs.length} 条岗位`);
