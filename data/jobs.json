@@ -587,5 +587,86 @@
     "id": "https://www.zhipin.com/job_detail/10ebbcdba283816d1HJ82tW-FFNY.html",
     "url": "https://www.zhipin.com/job_detail/10ebbcdba283816d1HJ82tW-FFNY.html",
     "source": "BOSS直聘"
+  },
+  {
+    "title": "招聘&找人招聘远程前端VUE大佬兼职",
+    "company": "A 糊涂的小白",
+    "tech": "Vue",
+    "salary": "",
+    "id": "https://eleduck.com/posts/Vvf0ql",
+    "url": "https://eleduck.com/posts/Vvf0ql",
+    "source": "电鸭"
+  },
+  {
+    "title": "体态评估师（可远程办公）",
+    "company": "未知公司",
+    "salary": "15-30K",
+    "tech": "",
+    "id": "https://www.zhipin.com/job_detail/5f8af11e4617809203F42d26EFdS.html",
+    "url": "https://www.zhipin.com/job_detail/5f8af11e4617809203F42d26EFdS.html",
+    "source": "BOSS直聘"
+  },
+  {
+    "title": "展览执行助理兼职（可远程线上）",
+    "company": "未知公司",
+    "salary": "1500-2000元/月",
+    "tech": "",
+    "id": "https://www.zhipin.com/job_detail/893adc5f7d20451e03d82tW6EVRT.html",
+    "url": "https://www.zhipin.com/job_detail/893adc5f7d20451e03d82tW6EVRT.html",
+    "source": "BOSS直聘"
+  },
+  {
+    "title": "[海外] [远程] Web3 全栈开发, crypto wallet, Node.js, React, JavaScript / TypeScript",
+    "id": "https://www.v2ex.com/t/1153129",
+    "url": "https://www.v2ex.com/t/1153129",
+    "source": "V2EX",
+    "tech": "React, Node.js",
+    "salary": "",
+    "company": "Sping"
+  },
+  {
+    "title": "新媒体运营",
+    "url": "https://yuancheng.work/4449.html",
+    "company": "金马科技",
+    "salary": "10k-15k",
+    "tech": "",
+    "source": "远程.work",
+    "id": "https://yuancheng.work/4449.html"
+  },
+  {
+    "title": "客服/风控",
+    "url": "https://yuancheng.work/4445.html",
+    "company": "金马科技",
+    "salary": "10k-15k",
+    "tech": "",
+    "source": "远程.work",
+    "id": "https://yuancheng.work/4445.html"
+  },
+  {
+    "title": "后端开发高级工程师",
+    "url": "https://yuancheng.work/4442.html",
+    "company": "金马科技",
+    "salary": "25k-50k",
+    "tech": "Python",
+    "source": "远程.work",
+    "id": "https://yuancheng.work/4442.html"
+  },
+  {
+    "title": "golang 开发工程师",
+    "url": "https://yuancheng.work/4346.html",
+    "company": "长沙黑帆科技有限公司",
+    "salary": "10k-15k",
+    "tech": "Go, MySQL, Redis, Linux",
+    "source": "远程.work",
+    "id": "https://yuancheng.work/4346.html"
+  },
+  {
+    "title": "线上自媒体运营（可兼职）",
+    "url": "https://yuancheng.work/4340.html",
+    "company": "MotionX",
+    "salary": "2k-5k",
+    "tech": "",
+    "source": "远程.work",
+    "id": "https://yuancheng.work/4340.html"
   }
 ]

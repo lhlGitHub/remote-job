@@ -4,7 +4,7 @@ const { extractFieldsByRegex } = require("../utils/extractFieldsByRegex");
  * 爬取 远程.work 的远程工作（列表页直接获取 title + 提要）
  * @returns {Promise<Array>}
  */
-async function crawlRemoteWork() {
+async function crawlRemoteWork(existingIdSet = new Set()) {
   const url = "https://yuancheng.work/";
   const IS_LOCAL = process.env.LOCAL === "true";
 
@@ -49,18 +49,24 @@ async function crawlRemoteWork() {
       });
   });
 
+  // 在列表阶段按已存在ID(=url)过滤
+  const filtered = jobs.filter((job) => job.url && !existingIdSet.has(job.url));
+
   // 🔍 结合正则抽取工具
-  for (const job of jobs) {
+  const result = [];
+  for (const job of filtered) {
     const extracted = await extractFieldsByRegex(job.summary);
     delete job.summary;
     job.tech = extracted.tech;
     job.salary = job.salary === "未标注" ? extracted.salary : job.salary;
     job.source = "远程.work";
+    job.id = job.url;
+    result.push(job);
   }
 
   await browser.close();
-  console.log(`🎯 抓取远程.work成功，共 ${jobs.length} 条`);
-  return jobs;
+  console.log(`🎯 抓取远程.work成功，共 ${result.length} 条`);
+  return result;
 }
 
 module.exports = crawlRemoteWork;

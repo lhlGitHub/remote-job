@@ -5,7 +5,7 @@ const { extractFieldsByRegex } = require("../utils/extractFieldsByRegex");
  * 爬取 V2EX 的远程工作板块
  * @returns {Promise<Array>}
  */
-async function crawlV2ex() {
+async function crawlV2ex(existingIdSet = new Set()) {
   const url = "https://www.v2ex.com/go/remote";
   const IS_LOCAL = process.env.LOCAL === "true";
 
@@ -44,9 +44,12 @@ async function crawlV2ex() {
       });
   });
 
+  // 在抓详情前先按已存在ID过滤
+  const newLinks = postLinks.filter((link) => !existingIdSet.has(link));
+
   const jobs = [];
 
-  for (const link of postLinks) {
+  for (const link of newLinks) {
     try {
       const detailPage = await browser.newPage();
       await detailPage.goto(link, { waitUntil: "domcontentloaded" });

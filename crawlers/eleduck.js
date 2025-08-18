@@ -1,7 +1,7 @@
 const puppeteer = require("puppeteer");
 const { extractFieldsByRegex } = require("../utils/extractFieldsByRegex");
 
-async function crawlEleduck() {
+async function crawlEleduck(existingIdSet = new Set()) {
   const url = "https://eleduck.com/categories/5?tags=0-0-19";
 
   const IS_LOCAL = process.env.LOCAL === "true";
@@ -42,9 +42,12 @@ async function crawlEleduck() {
       .map(({ href }) => href)
   );
 
+  // 在抓详情前先按已存在ID过滤
+  const newLinks = jobLinks.filter((link) => !existingIdSet.has(link));
+
   const jobs = [];
 
-  for (const link of jobLinks) {
+  for (const link of newLinks) {
     try {
       const detailPage = await browser.newPage();
       await detailPage.goto(link, { waitUntil: "domcontentloaded" });

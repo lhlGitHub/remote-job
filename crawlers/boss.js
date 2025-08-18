@@ -5,7 +5,7 @@ const { extractFieldsByRegex } = require("../utils/extractFieldsByRegex");
  * 爬取 BOSS直聘远程岗位（含详情页）
  * @returns {Promise<Array>}
  */
-async function crawlBoss() {
+async function crawlBoss(existingIdSet = new Set()) {
   const url = "https://www.zhipin.com/web/geek/job?query=远程&city=100010000";
 
   const IS_LOCAL = process.env.LOCAL === "true";
@@ -38,10 +38,13 @@ async function crawlBoss() {
       .filter(Boolean);
   });
 
-  console.log("🔍 获取到的职位链接:", jobLinks);
+  // 在抓详情前先去重
+  const newLinks = jobLinks.filter((link) => !existingIdSet.has(link));
+
+  console.log(`🧹 过滤后需抓取详情的链接数: ${newLinks.length}`);
   const jobs = [];
 
-  for (const link of jobLinks) {
+  for (const link of newLinks) {
     try {
       const detailPage = await browser.newPage();
       await detailPage.goto(link, { waitUntil: "domcontentloaded" });
