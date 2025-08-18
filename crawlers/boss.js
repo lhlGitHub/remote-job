@@ -29,7 +29,7 @@ async function crawlBoss() {
   // 获取前5条职位链接
   const jobLinks = await page.evaluate(() => {
     return Array.from(document.querySelectorAll(".job-card-box"))
-      .slice(0, 5)
+      .slice(0, 10)
       .map((item) => {
         const titleEl = item.querySelector(".job-name");
         const href = titleEl?.getAttribute("href");
@@ -38,6 +38,7 @@ async function crawlBoss() {
       .filter(Boolean);
   });
 
+  console.log("🔍 获取到的职位链接:", jobLinks);
   const jobs = [];
 
   for (const link of jobLinks) {
