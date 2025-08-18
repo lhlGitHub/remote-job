@@ -32,12 +32,12 @@ async function main() {
     return;
   }
 
-  // for (const job of newJobs) {
-  //   await sendJobToTelegram(job);
-  // }
+  for (const job of newJobs) {
+    await sendJobToTelegram(job);
+  }
 
   // 合并后写入新数据
-  // saveJobs([...oldJobs, ...newJobs]);
+  saveJobs([...oldJobs, ...newJobs]);
   console.log("newJobs", newJobs);
   console.log(`✅ 本次新增 ${newJobs.length} 条岗位`);
 }

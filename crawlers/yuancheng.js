@@ -45,7 +45,15 @@ async function crawlRemoteWork(existingIdSet = new Set()) {
           el.querySelector(".job-salary")?.innerText.trim() || "未标注";
         const summary = el.querySelector(".job-detail .typo")?.innerText.trim();
 
-        return { title, url, company, salary, summary };
+        return {
+          title,
+          id: url,
+          url,
+          company,
+          salary,
+          summary,
+          source: "远程.work",
+        };
       });
   });
 
@@ -59,8 +67,7 @@ async function crawlRemoteWork(existingIdSet = new Set()) {
     delete job.summary;
     job.tech = extracted.tech;
     job.salary = job.salary === "未标注" ? extracted.salary : job.salary;
-    job.source = "远程.work";
-    job.id = job.url;
+
     result.push(job);
   }
 
