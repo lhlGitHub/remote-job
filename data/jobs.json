@@ -826,5 +826,23 @@
     "id": "https://eleduck.com/posts/rdfXlN",
     "url": "https://eleduck.com/posts/rdfXlN",
     "source": "电鸭"
+  },
+  {
+    "title": "招聘&找人区块链数据工程师",
+    "company": "Eric",
+    "tech": "JavaScript, Python, Java, Go, PostgreSQL, MongoDB, Redis",
+    "salary": "",
+    "id": "https://eleduck.com/posts/z1fnJX",
+    "url": "https://eleduck.com/posts/z1fnJX",
+    "source": "电鸭"
+  },
+  {
+    "title": "安卓逆向工程师",
+    "id": "https://yuancheng.work/4337.html",
+    "url": "https://yuancheng.work/4337.html",
+    "company": "EVO SG",
+    "salary": "25k-50k",
+    "source": "远程.work",
+    "tech": "Java, Android"
   }
 ]
