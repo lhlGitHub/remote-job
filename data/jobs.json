@@ -844,5 +844,23 @@
     "salary": "25k-50k",
     "source": "远程.work",
     "tech": "Java, Android"
+  },
+  {
+    "title": "web3开发工程师（可远程办公）",
+    "company": "未知公司",
+    "salary": "7500-15000元/月",
+    "tech": "Vue",
+    "id": "https://www.zhipin.com/job_detail/5c01eb717c75aa6903R90ti5FFJZ.html",
+    "url": "https://www.zhipin.com/job_detail/5c01eb717c75aa6903R90ti5FFJZ.html",
+    "source": "BOSS直聘"
+  },
+  {
+    "title": "小语种翻译兼职（可远程在家办公）",
+    "company": "未知公司",
+    "salary": "20-25元/时",
+    "tech": "",
+    "id": "https://www.zhipin.com/job_detail/0fdd7561109fd7011HF70tm-GFdY.html",
+    "url": "https://www.zhipin.com/job_detail/0fdd7561109fd7011HF70tm-GFdY.html",
+    "source": "BOSS直聘"
   }
 ]
