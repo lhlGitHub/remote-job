@@ -1,23 +1,5 @@
 [
   {
-    "title": "招聘&找人「远程」「兼职」｜ API 集成架构师 / 解决方案工程师（售后&物流）",
-    "company": "135****3410",
-    "tech": "",
-    "salary": "",
-    "id": "https://eleduck.com/posts/v5fkWA",
-    "url": "https://eleduck.com/posts/v5fkWA",
-    "source": "电鸭"
-  },
-  {
-    "title": "招聘&找人【付费置顶】硅谷直播电商创业公司招NodeJS后端工程师（远程）",
-    "company": "will🌳",
-    "tech": "Node.js",
-    "salary": "",
-    "id": "https://eleduck.com/posts/gYfl2E",
-    "url": "https://eleduck.com/posts/gYfl2E",
-    "source": "电鸭"
-  },
-  {
     "title": "Web3全职/兼职/远程 UI 设计师",
     "company": "Kian",
     "tech": "",
@@ -880,5 +862,41 @@
     "id": "https://eleduck.com/posts/qzfmBb",
     "url": "https://eleduck.com/posts/qzfmBb",
     "source": "电鸭"
+  },
+  {
+    "title": "招聘&找人【海外技术企业】远程·软件测试与性能工程师",
+    "company": "柒柒",
+    "tech": "JavaScript, Python, Java, Linux",
+    "salary": "",
+    "id": "https://eleduck.com/posts/74f5jL",
+    "url": "https://eleduck.com/posts/74f5jL",
+    "source": "电鸭"
+  },
+  {
+    "title": "招聘&找人[原始创业团队| 急需运营] 面向Z世代的AI陪伴项目(远程/兼职可，重主动性）",
+    "company": "淡定点",
+    "tech": "",
+    "salary": "",
+    "id": "https://eleduck.com/posts/5BfVjG",
+    "url": "https://eleduck.com/posts/5BfVjG",
+    "source": "电鸭"
+  },
+  {
+    "title": "h5开发工程师（可远程）",
+    "company": "未知公司",
+    "salary": "10-15K",
+    "tech": "React, Node.js, Go, MongoDB",
+    "id": "https://www.zhipin.com/job_detail/a128d6f0af7cf73e03B83t--ElNZ.html",
+    "url": "https://www.zhipin.com/job_detail/a128d6f0af7cf73e03B83t--ElNZ.html",
+    "source": "BOSS直聘"
+  },
+  {
+    "title": "[远程] 软件工程师",
+    "id": "https://www.v2ex.com/t/1154123",
+    "url": "https://www.v2ex.com/t/1154123",
+    "source": "V2EX",
+    "tech": "",
+    "salary": "",
+    "company": "nito61"
   }
 ]
