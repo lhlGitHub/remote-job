@@ -1,23 +1,5 @@
 [
   {
-    "title": "兼职！可远程/线上办公！—孟加拉语翻译",
-    "company": "未知公司",
-    "salary": "8000-10000元/月",
-    "tech": "",
-    "id": "https://www.zhipin.com/job_detail/b9ec52c1e77043a71HF82ty-FVVR.html",
-    "url": "https://www.zhipin.com/job_detail/b9ec52c1e77043a71HF82ty-FVVR.html",
-    "source": "BOSS直聘"
-  },
-  {
-    "title": "小语种翻译兼职（可远程在家办公）",
-    "company": "未知公司",
-    "salary": "20-25元/时",
-    "tech": "",
-    "id": "https://www.zhipin.com/job_detail/b8f5a4302976e7801HF70tm_F1JY.html",
-    "url": "https://www.zhipin.com/job_detail/b8f5a4302976e7801HF70tm_F1JY.html",
-    "source": "BOSS直聘"
-  },
-  {
     "title": "量化 / LLM 算法 / 全栈",
     "id": "https://www.v2ex.com/t/1150831",
     "url": "https://www.v2ex.com/t/1150831",
@@ -898,5 +880,23 @@
     "salary": "5k-10k",
     "source": "远程.work",
     "tech": ""
+  },
+  {
+    "title": "招聘&找人【招聘】C++开发工程师 - 即时通讯软件开发",
+    "company": "130****5312",
+    "tech": "Linux",
+    "salary": "范围：45K/月（根据能力和经验调整）",
+    "id": "https://eleduck.com/posts/x0fQ8r",
+    "url": "https://eleduck.com/posts/x0fQ8r",
+    "source": "电鸭"
+  },
+  {
+    "title": "英译简中/繁体专利翻译（兼职，可远程）",
+    "company": "未知公司",
+    "salary": "7500-16000元/月",
+    "tech": "",
+    "id": "https://www.zhipin.com/job_detail/a9394f71bbeb07bb1H1_2N-8FVNS.html",
+    "url": "https://www.zhipin.com/job_detail/a9394f71bbeb07bb1H1_2N-8FVNS.html",
+    "source": "BOSS直聘"
   }
 ]
