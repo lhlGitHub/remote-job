@@ -1,23 +1,5 @@
 [
   {
-    "title": "兼职 可远程 java资深开发 后端工程师 erp",
-    "company": "未知公司",
-    "salary": "4-5K",
-    "tech": "Java",
-    "id": "https://www.zhipin.com/job_detail/09a88ffa1118632903V73du-E1FZ.html",
-    "url": "https://www.zhipin.com/job_detail/09a88ffa1118632903V73du-E1FZ.html",
-    "source": "BOSS直聘"
-  },
-  {
-    "title": "(可远程)留学顾问",
-    "company": "未知公司",
-    "salary": "3000-20000元/月",
-    "tech": "",
-    "id": "https://www.zhipin.com/job_detail/77f7200a998e6cc303Z53d-1EVRU.html",
-    "url": "https://www.zhipin.com/job_detail/77f7200a998e6cc303Z53d-1EVRU.html",
-    "source": "BOSS直聘"
-  },
-  {
     "title": "英译简中/繁体专利翻译（兼职，可远程）",
     "company": "未知公司",
     "salary": "7500-16000元/月",
@@ -898,5 +880,23 @@
     "id": "https://eleduck.com/posts/L5fyJA",
     "url": "https://eleduck.com/posts/L5fyJA",
     "source": "电鸭"
+  },
+  {
+    "title": "招聘&找人招聘一个懂一点合约的web3前端",
+    "company": "Specter",
+    "tech": "",
+    "salary": "7k-15k，全职薪资2w5-3w5",
+    "id": "https://eleduck.com/posts/kRfQ29",
+    "url": "https://eleduck.com/posts/kRfQ29",
+    "source": "电鸭"
+  },
+  {
+    "title": "开发兼职（可远程线上办公）",
+    "company": "未知公司",
+    "salary": "50-60元/时",
+    "tech": "Python, Java, MySQL",
+    "id": "https://www.zhipin.com/job_detail/e540c5754e9a5d8e03F53tu7GFRY.html",
+    "url": "https://www.zhipin.com/job_detail/e540c5754e9a5d8e03F53tu7GFRY.html",
+    "source": "BOSS直聘"
   }
 ]
