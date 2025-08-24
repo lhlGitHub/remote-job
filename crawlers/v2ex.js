@@ -1,15 +1,12 @@
-const { launchBrowser } = require("../utils/crawler");
 const { extractFieldsByRegex } = require("../utils/extractFieldsByRegex");
 
 /**
  * 爬取 V2EX 的远程工作板块
  * @returns {Promise<Array>}
  */
-async function crawlV2ex(existingIdSet = new Set()) {
+async function crawlV2ex(browser, existingIdSet = new Set()) {
   try {
     const url = "https://www.v2ex.com/go/remote";
-
-    const browser = await launchBrowser();
 
     const page = await browser.newPage();
     await page.setUserAgent(
@@ -80,7 +77,7 @@ async function crawlV2ex(existingIdSet = new Set()) {
       }
     }
 
-    await browser.close();
+    await page.close();
     console.log(`🎯 抓取V2EX成功，共 ${jobs.length} 条`);
     return jobs;
   } catch (error) {

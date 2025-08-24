@@ -1,14 +1,12 @@
-const { launchBrowser } = require("../utils/crawler");
 const { extractFieldsByRegex } = require("../utils/extractFieldsByRegex");
 /**
  * 爬取 远程.work 的远程工作（列表页直接获取 title + 提要）
  * @returns {Promise<Array>}
  */
-async function crawlRemoteWork(existingIdSet = new Set()) {
+async function crawlRemoteWork(browser, existingIdSet = new Set()) {
   try {
     const url = "https://yuancheng.work/";
 
-    const browser = await launchBrowser();
     const page = await browser.newPage();
     await page.setUserAgent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -68,7 +66,7 @@ async function crawlRemoteWork(existingIdSet = new Set()) {
       result.push(job);
     }
 
-    await browser.close();
+    await page.close();
     console.log(`🎯 抓取远程.work成功，共 ${result.length} 条`);
     return result;
   } catch (error) {

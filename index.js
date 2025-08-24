@@ -7,7 +7,7 @@ const {
   cleanupOldJobs,
 } = require("./utils/storage");
 const { sendJobToTelegram } = require("./utils/telegram");
-
+const { launchBrowser } = require("./utils/crawler");
 // 导入爬虫
 const crawlBoss = require("./crawlers/boss");
 const crawlEleduck = require("./crawlers/eleduck");
@@ -18,16 +18,17 @@ async function main() {
   try {
     console.log("📦 开始抓取远程岗位...");
 
+    const browser = await launchBrowser();
     const oldJobs = await loadJobs();
     const existingIdSet = new Set(oldJobs.map((job) => job.id));
     console.log(`📚 数据库中已有 ${oldJobs.length} 条岗位记录`);
 
     const [bossJobs, eleduckJobs, v2exJobs, remoteWorkJobs] = await Promise.all(
       [
-        crawlBoss(existingIdSet),
-        crawlEleduck(existingIdSet),
-        crawlV2ex(existingIdSet),
-        crawlRemoteWork(existingIdSet),
+        crawlBoss(browser, existingIdSet),
+        crawlEleduck(browser, existingIdSet),
+        crawlV2ex(browser, existingIdSet),
+        crawlRemoteWork(browser, existingIdSet),
       ]
     );
 

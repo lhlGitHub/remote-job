@@ -1,11 +1,8 @@
-const { launchBrowser } = require("../utils/crawler");
 const { extractFieldsByRegex } = require("../utils/extractFieldsByRegex");
 
-async function crawlEleduck(existingIdSet = new Set()) {
+async function crawlEleduck(browser, existingIdSet = new Set()) {
   try {
     const url = "https://eleduck.com/categories/5?tags=0-0-19";
-
-    const browser = await launchBrowser();
 
     const page = await browser.newPage();
     await page.setUserAgent(
@@ -81,7 +78,7 @@ async function crawlEleduck(existingIdSet = new Set()) {
       }
     }
 
-    await browser.close();
+    await page.close();
 
     console.log(`🦆 电鸭抓取成功，共 ${jobs.length} 条`);
     return jobs;

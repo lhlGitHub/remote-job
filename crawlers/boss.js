@@ -1,14 +1,12 @@
 const { extractFieldsByRegex } = require("../utils/extractFieldsByRegex");
-const { launchBrowser } = require("../utils/crawler");
+
 /**
  * 爬取 BOSS直聘远程岗位（含详情页）
  * @returns {Promise<Array>}
  */
-async function crawlBoss(existingIdSet = new Set()) {
+async function crawlBoss(browser, existingIdSet = new Set()) {
   try {
     const url = "https://www.zhipin.com/web/geek/job?query=远程&city=100010000";
-
-    const browser = await launchBrowser();
 
     const page = await browser.newPage();
     await page.setUserAgent(
@@ -75,7 +73,7 @@ async function crawlBoss(existingIdSet = new Set()) {
       }
     }
 
-    await browser.close();
+    await page.close();
     console.log(`🧧 抓取BOSS直聘成功，共 ${jobs.length} 条`);
     return jobs;
   } catch (error) {
