@@ -1,5 +1,4 @@
 const chromium = require("chrome-aws-lambda");
-const puppeteer = require("puppeteer");
 const puppeteerCore = require("puppeteer-core");
 
 async function launchBrowser() {
@@ -9,6 +8,7 @@ async function launchBrowser() {
 
   if (isLocal) {
     // 本地环境
+    const puppeteer = require("puppeteer");
     return await puppeteer.launch({
       executablePath:
         "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
@@ -17,11 +17,12 @@ async function launchBrowser() {
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
   } else {
-    // Vercel 生产环境
+    // 生产环境 (Vercel)
+    const execPath = await chromium.executablePath; // ✅ 这里必须 await
     return await puppeteerCore.launch({
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
-      executablePath: chromium.executablePath, // ✅ 不要 await
+      executablePath: execPath,
       headless: chromium.headless,
     });
   }
