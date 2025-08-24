@@ -16,15 +16,31 @@ async function launchBrowser() {
   } else {
     // 生产环境 (Vercel)
 
-    const chromium = (await import("@sparticuz/chromium")).default;
-    const puppeteerCore = await import("puppeteer-core");
-    launchOptions = {
-      headless: true,
-      args: chromium.args,
-      executablePath: await chromium.executablePath(),
-    };
+    const chromium = require("@sparticuz/chromium-min");
+    const puppeteerCore = require("puppeteer-core");
 
-    return await puppeteerCore.launch(launchOptions);
+    // 确保 Chromium 已准备就绪
+    await chromium.font(
+      "https://raw.githubusercontent.com/googlefonts/noto-cjk/main/Sans/OTF/SimplifiedChinese/NotoSansCJKsc-Regular.otf"
+    );
+
+    return await puppeteerCore.launch({
+      args: [
+        ...chromium.args,
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-accelerated-2d-canvas",
+        "--no-first-run",
+        "--no-zygote",
+        "--single-process",
+        "--disable-gpu",
+      ],
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath(),
+      headless: chromium.headless,
+      ignoreHTTPSErrors: true,
+    });
   }
 }
 
