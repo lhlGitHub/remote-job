@@ -1,24 +1,22 @@
-const puppeteer = require("puppeteer");
+const puppeteerCore = require("puppeteer-core");
 
 async function launchBrowser() {
-  try {
-    return await puppeteer.launch({
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-dev-shm-usage",
-        "--disable-gpu",
-        "--single-process",
-        "--no-zygote",
-        "--headless=new",
-      ],
-      headless: "new",
-    });
-  } catch (error) {
-    console.error("Failed to launch browser:", error);
+  const isLocal =
+    process.env.NODE_ENV !== "production" &&
+    !process.env.AWS_LAMBDA_FUNCTION_NAME;
 
-    // 备用方案：尝试使用系统 Chromium
-    const puppeteerCore = require("puppeteer-core");
+  if (isLocal) {
+    // 本地环境
+    const puppeteer = require("puppeteer");
+    return await puppeteer.launch({
+      executablePath:
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      headless: false,
+      defaultViewport: null,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
+  } else {
+    // 生产环境 (Vercel)
     return await puppeteerCore.launch({
       args: [
         "--no-sandbox",
