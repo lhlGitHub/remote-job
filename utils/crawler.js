@@ -16,7 +16,7 @@ async function launchBrowser() {
   } else {
     // 生产环境 (Vercel)
 
-    const chromium = require("@sparticuz/chromium-min");
+    const chromium = require("@sparticuz/chromium");
     const puppeteerCore = require("puppeteer-core");
 
     // 确保 Chromium 已准备就绪
