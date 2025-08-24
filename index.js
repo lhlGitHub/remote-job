@@ -23,15 +23,11 @@ async function main() {
     const existingIdSet = new Set(oldJobs.map((job) => job.id));
     console.log(`📚 数据库中已有 ${oldJobs.length} 条岗位记录`);
 
-    const [bossJobs, eleduckJobs, v2exJobs, remoteWorkJobs] = await Promise.all(
-      [
-        crawlBoss(browser, existingIdSet),
-        crawlEleduck(browser, existingIdSet),
-        crawlV2ex(browser, existingIdSet),
-        crawlRemoteWork(browser, existingIdSet),
-      ]
-    );
-
+    const bossJobs = await crawlBoss(browser, existingIdSet);
+    const eleduckJobs = await crawlEleduck(browser, existingIdSet);
+    const v2exJobs = await crawlV2ex(browser, existingIdSet);
+    const remoteWorkJobs = await crawlRemoteWork(browser, existingIdSet);
+    browser.close();
     const allJobs = [
       ...eleduckJobs,
       ...bossJobs,

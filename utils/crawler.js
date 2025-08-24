@@ -35,6 +35,7 @@ async function launchBrowser() {
         "--no-first-run",
         "--no-zygote",
         "--disable-gpu",
+        "--single-process",
       ],
       defaultViewport: chromium.defaultViewport,
       executablePath: execPath,
