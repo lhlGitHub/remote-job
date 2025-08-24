@@ -17,7 +17,7 @@ async function launchBrowser() {
     });
   } else {
     // 生产环境 (Vercel)
-    return await puppeteer.launch({
+    return await puppeteerCore.launch({
       args: [...chrome.args, "--hide-scrollbars", "--disable-web-security"],
       defaultViewport: chrome.defaultViewport,
       executablePath: await chrome.executablePath,
