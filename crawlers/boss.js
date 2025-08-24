@@ -1,6 +1,5 @@
-const puppeteer = require("puppeteer");
 const { extractFieldsByRegex } = require("../utils/extractFieldsByRegex");
-
+const { launchBrowser } = require("../utils/crawler");
 /**
  * 爬取 BOSS直聘远程岗位（含详情页）
  * @returns {Promise<Array>}
@@ -9,15 +8,7 @@ async function crawlBoss(existingIdSet = new Set()) {
   try {
     const url = "https://www.zhipin.com/web/geek/job?query=远程&city=100010000";
 
-    const IS_LOCAL = process.env.LOCAL === "true";
-    const browser = await puppeteer.launch({
-      executablePath: IS_LOCAL
-        ? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-        : undefined,
-      headless: IS_LOCAL ? false : "new",
-      defaultViewport: null,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    });
+    const browser = await launchBrowser();
 
     const page = await browser.newPage();
     await page.setUserAgent(

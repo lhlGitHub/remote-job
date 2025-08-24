@@ -1,4 +1,4 @@
-const puppeteer = require("puppeteer");
+const { launchBrowser } = require("../utils/crawler");
 const { extractFieldsByRegex } = require("../utils/extractFieldsByRegex");
 
 /**
@@ -8,16 +8,8 @@ const { extractFieldsByRegex } = require("../utils/extractFieldsByRegex");
 async function crawlV2ex(existingIdSet = new Set()) {
   try {
     const url = "https://www.v2ex.com/go/remote";
-    const IS_LOCAL = process.env.LOCAL === "true";
 
-    const browser = await puppeteer.launch({
-      executablePath: IS_LOCAL
-        ? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-        : undefined,
-      headless: IS_LOCAL ? false : "new",
-      defaultViewport: null,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    });
+    const browser = await launchBrowser();
 
     const page = await browser.newPage();
     await page.setUserAgent(

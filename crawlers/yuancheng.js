@@ -1,4 +1,4 @@
-const puppeteer = require("puppeteer");
+const { launchBrowser } = require("../utils/crawler");
 const { extractFieldsByRegex } = require("../utils/extractFieldsByRegex");
 /**
  * 爬取 远程.work 的远程工作（列表页直接获取 title + 提要）
@@ -7,17 +7,8 @@ const { extractFieldsByRegex } = require("../utils/extractFieldsByRegex");
 async function crawlRemoteWork(existingIdSet = new Set()) {
   try {
     const url = "https://yuancheng.work/";
-    const IS_LOCAL = process.env.LOCAL === "true";
 
-    const browser = await puppeteer.launch({
-      executablePath: IS_LOCAL
-        ? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-        : undefined,
-      headless: IS_LOCAL ? false : "new",
-      defaultViewport: null,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    });
-
+    const browser = await launchBrowser();
     const page = await browser.newPage();
     await page.setUserAgent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"

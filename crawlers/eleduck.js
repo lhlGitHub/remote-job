@@ -1,19 +1,11 @@
-const puppeteer = require("puppeteer");
+const { launchBrowser } = require("../utils/crawler");
 const { extractFieldsByRegex } = require("../utils/extractFieldsByRegex");
 
 async function crawlEleduck(existingIdSet = new Set()) {
   try {
     const url = "https://eleduck.com/categories/5?tags=0-0-19";
 
-    const IS_LOCAL = process.env.LOCAL === "true";
-    const browser = await puppeteer.launch({
-      executablePath: IS_LOCAL
-        ? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-        : undefined,
-      headless: IS_LOCAL ? false : "new", // 或 true
-      defaultViewport: null,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    });
+    const browser = await launchBrowser();
 
     const page = await browser.newPage();
     await page.setUserAgent(

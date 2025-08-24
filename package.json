@@ -9,10 +9,12 @@
     "@supabase/supabase-js": "^2.38.0",
     "axios": "^1.6.0",
     "cheerio": "^1.0.0-rc.12",
+    "chrome-aws-lambda": "^10.1.0",
     "dotenv": "^16.3.1",
     "https-proxy-agent": "^7.0.6",
     "node-cron": "^3.0.2",
     "node-telegram-bot-api": "^0.61.0",
-    "puppeteer": "^21.3.8"
+    "puppeteer": "^21.3.8",
+    "puppeteer-core": "^24.17.0"
   }
 }
