@@ -2,7 +2,7 @@
   "crons": [
     {
       "path": "/api/cron",
-      "schedule": "0 */4 * * *" // 每 4 小时执行一次
+      "schedule": "0 */4 * * *"
     }
   ]
 }
