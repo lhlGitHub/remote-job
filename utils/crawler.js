@@ -1,5 +1,3 @@
-const puppeteerCore = require("puppeteer-core");
-
 async function launchBrowser() {
   const isLocal =
     process.env.NODE_ENV !== "production" &&
@@ -17,6 +15,15 @@ async function launchBrowser() {
     });
   } else {
     // 生产环境 (Vercel)
+
+    const chromium = (await import("@sparticuz/chromium")).default;
+    const puppeteerCore = await import("puppeteer-core");
+    launchOptions = {
+      headless: true,
+      args: chromium.args,
+      executablePath: await chromium.executablePath(),
+    };
+
     return await puppeteerCore.launch({
       args: [...chrome.args, "--hide-scrollbars", "--disable-web-security"],
       defaultViewport: chrome.defaultViewport,
