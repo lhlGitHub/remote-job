@@ -6,6 +6,7 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "@sparticuz/chromium": "^138.0.2",
     "@supabase/supabase-js": "^2.38.0",
     "axios": "^1.6.0",
     "cheerio": "^1.0.0-rc.12",

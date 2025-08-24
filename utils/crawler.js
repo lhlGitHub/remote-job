@@ -1,4 +1,4 @@
-const chromium = require("chrome-aws-lambda");
+const chromium = require("@sparticuz/chromium");
 const puppeteerCore = require("puppeteer-core");
 
 async function launchBrowser() {
@@ -18,7 +18,8 @@ async function launchBrowser() {
     });
   } else {
     // 生产环境 (Vercel)
-    const execPath = await chromium.executablePath; // ✅ 这里必须 await
+    const execPath = await chromium.executablePath;
+
     return await puppeteerCore.launch({
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
