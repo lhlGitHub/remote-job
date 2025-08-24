@@ -24,13 +24,7 @@ async function launchBrowser() {
       executablePath: await chromium.executablePath(),
     };
 
-    return await puppeteerCore.launch({
-      args: [...chrome.args, "--hide-scrollbars", "--disable-web-security"],
-      defaultViewport: chrome.defaultViewport,
-      executablePath: await chrome.executablePath,
-      headless: chrome.headless,
-      ignoreHTTPSErrors: true,
-    });
+    return await puppeteerCore.launch(launchOptions);
   }
 }
 
