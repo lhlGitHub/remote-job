@@ -24,6 +24,7 @@ async function launchBrowser() {
       "https://raw.githubusercontent.com/googlefonts/noto-cjk/main/Sans/OTF/SimplifiedChinese/NotoSansCJKsc-Regular.otf"
     );
 
+    const execPath = await chromium.executablePath();
     return await puppeteerCore.launch({
       args: [
         ...chromium.args,
@@ -33,11 +34,10 @@ async function launchBrowser() {
         "--disable-accelerated-2d-canvas",
         "--no-first-run",
         "--no-zygote",
-        "--single-process",
         "--disable-gpu",
       ],
       defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath(),
+      executablePath: execPath,
       headless: chromium.headless,
       ignoreHTTPSErrors: true,
     });
