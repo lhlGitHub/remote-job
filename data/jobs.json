@@ -1,14 +1,5 @@
 [
   {
-    "title": "量化 / LLM 算法 / 全栈",
-    "id": "https://www.v2ex.com/t/1150831",
-    "url": "https://www.v2ex.com/t/1150831",
-    "source": "V2EX",
-    "tech": "TypeScript, React, Node.js, PostgreSQL, AWS, Redis",
-    "salary": "",
-    "company": "arlicle"
-  },
-  {
     "title": "[远程] 高级数据 / 前端工程师 30 - 40K/mo",
     "id": "https://www.v2ex.com/t/1150541",
     "url": "https://www.v2ex.com/t/1150541",
@@ -897,6 +888,15 @@
     "tech": "",
     "id": "https://www.zhipin.com/job_detail/a9394f71bbeb07bb1H1_2N-8FVNS.html",
     "url": "https://www.zhipin.com/job_detail/a9394f71bbeb07bb1H1_2N-8FVNS.html",
+    "source": "BOSS直聘"
+  },
+  {
+    "title": "（可远程办公）大模型算法实习岗",
+    "company": "未知公司",
+    "salary": "150-230元/天",
+    "tech": "",
+    "id": "https://www.zhipin.com/job_detail/0b8432519a4fa16c03N60925GFZR.html",
+    "url": "https://www.zhipin.com/job_detail/0b8432519a4fa16c03N60925GFZR.html",
     "source": "BOSS直聘"
   }
 ]
