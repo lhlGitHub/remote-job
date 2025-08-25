@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: job-crawler
+    env: node
+    plan: free
+    buildCommand: "npm install"
+    startCommand: "node index.js"
+    autoDeploy: true
+
+schedules:
+  - name: daily-crawl
+    service: job-crawler
+    cron: "0 8 * * *" # 每天早上 8 点执行
+    command: "node index.js"
