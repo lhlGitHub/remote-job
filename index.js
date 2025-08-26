@@ -16,7 +16,9 @@ const crawlRemoteWork = require("./crawlers/yuancheng");
 
 async function main() {
   try {
-    console.log("📦 开始抓取远程岗位...");
+    console.log(
+      `📦 开始抓取远程岗位... 当前时间: ${new Date().toLocaleString()}`
+    );
 
     const browser = await launchBrowser();
     const oldJobs = await loadJobs();
