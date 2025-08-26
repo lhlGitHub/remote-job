@@ -1,3 +1,4 @@
+const puppeteer = require("puppeteer");
 async function launchBrowser() {
   const IS_LOCAL = process.env.LOCAL === "true";
   const browser = await puppeteer.launch({
