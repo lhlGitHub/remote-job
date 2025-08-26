@@ -51,6 +51,9 @@ async function main() {
       return [];
     }
 
+    // 先清理旧数据，确保数据库记录数不超过100条
+    await cleanupOldJobs();
+
     for (const job of newJobs) {
       try {
         await sendJobToTelegram(job);
@@ -59,8 +62,8 @@ async function main() {
       }
     }
 
+    // 清理完成后再保存新职位
     await saveJobs(newJobs);
-    await cleanupOldJobs();
 
     console.log(`✅ 本次新增 ${newJobs.length} 条岗位`);
     return newJobs;

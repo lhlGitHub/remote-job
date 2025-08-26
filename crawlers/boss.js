@@ -27,11 +27,9 @@ async function crawlBoss(browser, existingIdSet = new Set()) {
         })
         .filter(Boolean);
     });
-
     // 在抓详情前先去重
     const newLinks = jobLinks.filter((link) => !existingIdSet.has(link));
 
-    console.log(`🧹 过滤后需抓取详情的链接数: ${newLinks.length}`);
     const jobs = [];
 
     for (const link of newLinks) {
