@@ -1,3 +1,5 @@
+const fs = require("fs");
+const path = require("path");
 const { extractFieldsByRegex } = require("../utils/extractFieldsByRegex");
 
 /**
@@ -10,13 +12,30 @@ async function crawlBoss(browser, existingIdSet = new Set()) {
 
     const page = await browser.newPage();
     await page.setUserAgent(
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     );
 
-    await page.goto(url, { waitUntil: "domcontentloaded" });
-    await page.waitForSelector(".job-card-box", { timeout: 10000 });
+    try {
+      await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
+      await page.waitForSelector(".job-card-box", { timeout: 15000 });
+    } catch (err) {
+      console.error("❌ BOSS直聘列表页加载失败:", err.message);
 
-    // 获取前5条职位链接
+      // 保存截图 + HTML 调试
+      const debugDir = path.resolve(__dirname, "../debug");
+      if (!fs.existsSync(debugDir)) fs.mkdirSync(debugDir);
+      await page.screenshot({
+        path: path.join(debugDir, "boss_list.png"),
+        fullPage: true,
+      });
+      const html = await page.content();
+      fs.writeFileSync(path.join(debugDir, "boss_list.html"), html, "utf-8");
+
+      await page.close();
+      return [];
+    }
+
+    // 获取前10条职位链接
     const jobLinks = await page.evaluate(() => {
       return Array.from(document.querySelectorAll(".job-card-box"))
         .slice(0, 10)
@@ -27,7 +46,8 @@ async function crawlBoss(browser, existingIdSet = new Set()) {
         })
         .filter(Boolean);
     });
-    // 在抓详情前先去重
+
+    // 去重
     const newLinks = jobLinks.filter((link) => !existingIdSet.has(link));
 
     const jobs = [];
@@ -35,9 +55,11 @@ async function crawlBoss(browser, existingIdSet = new Set()) {
     for (const link of newLinks) {
       try {
         const detailPage = await browser.newPage();
-        await detailPage.goto(link, { waitUntil: "domcontentloaded" });
-
-        await detailPage.waitForSelector(".job-primary", { timeout: 10000 });
+        await detailPage.goto(link, {
+          waitUntil: "domcontentloaded",
+          timeout: 30000,
+        });
+        await detailPage.waitForSelector(".job-primary", { timeout: 15000 });
 
         const job = await detailPage.evaluate(() => {
           const title =
@@ -49,7 +71,6 @@ async function crawlBoss(browser, existingIdSet = new Set()) {
             document.querySelector(".salary")?.innerText.trim() || "薪资面议";
           const content =
             document.querySelector(".job-sec-text")?.innerText.trim() || "";
-
           return { title, company, salary, content };
         });
 
@@ -68,6 +89,20 @@ async function crawlBoss(browser, existingIdSet = new Set()) {
         await detailPage.close();
       } catch (error) {
         console.error(`❌ 抓取失败: ${link}`, error.message);
+
+        // 保存失败页面调试
+        const debugDir = path.resolve(__dirname, "../debug");
+        if (!fs.existsSync(debugDir)) fs.mkdirSync(debugDir);
+        await detailPage.screenshot({
+          path: path.join(debugDir, `boss_detail.png`),
+          fullPage: true,
+        });
+        const html = await detailPage.content();
+        fs.writeFileSync(
+          path.join(debugDir, `boss_detail.html`),
+          html,
+          "utf-8"
+        );
       }
     }
 
