@@ -9,7 +9,7 @@ if (!TOKEN || !CHAT_ID) {
 }
 // 只在本地启用代理（例如通过环境变量判断）
 const IS_LOCAL = process.env.LOCAL === "true";
-const proxy = "http://127.0.0.1:7890";
+const proxy = "http://127.0.0.1:7890"; // 本地代理地址
 console.log("IS_LOCAL", IS_LOCAL);
 const bot = new TelegramBot(TOKEN, {
   polling: false,
